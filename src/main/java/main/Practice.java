@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Arrays;
+
 /**
  * A technológia fejlődésének hála az emberiség képessé vált az űr meghódítására
  * - és meg is tette azt: számtalan bolygót fedezett fel, és gyarmatosított.
@@ -36,7 +38,21 @@ public class Practice {
      * @return a pajzs ereje
      */
     public static int getShieldPower(String shipClass) {
-        return -1;
+        switch (shipClass) {
+            case "Intrepid":
+                return 100;
+            case "Nova":
+                return 200;
+            case "Raven":
+                return 300;
+            case "Galaxy":
+                return 500;
+            case "Dreadnought":
+                return 800;
+            default:
+                return 0;
+        }
+
     }
 
     /**
@@ -56,7 +72,8 @@ public class Practice {
      * @return az elvárt szint
      */
     public static double countRequirement(int[] scores) {
-        return 0.0;
+
+        return (double)(scores[0]+scores[scores.length-1])/2;
     }
 
     /**
@@ -76,8 +93,14 @@ public class Practice {
      * @param weaponCharge a fegyverzet töltöttsége
      * @return a hajó harcképes-e
      */
+
+
     public static boolean isShipAbleToFight(int shieldCharge, int weaponCharge) {
-        return false;
+        if (shieldCharge >20 && weaponCharge >20 && (shieldCharge+weaponCharge)/2f > 50)
+            return true;
+        else {
+            return false;
+        }
     }
 
     /**
@@ -109,8 +132,20 @@ public class Practice {
      * @return a megrendelés teljesítéséhez szükséges napok száma
      */
     public static int getSpaceRabbitDays(int startRabbitValue, int requiredRabbits) {
-        return -1;
-    }
+        int days = 1;
+        while( startRabbitValue < requiredRabbits){
+            days++;
+            int rabbits = startRabbitValue;
+            startRabbitValue += rabbits;
+        }
+
+        return days;
+
+
+        }
+
+
+
 
     /**
      * 5. feladat - 3p
@@ -128,7 +163,7 @@ public class Practice {
      * @return a teljes sereg száma
      */
     public static int sumArmy(int[] armyOfPlanets) {
-        return -1;
+        return Arrays.stream(armyOfPlanets).sum();
     }
 
     /**
@@ -147,7 +182,14 @@ public class Practice {
      * @return a megnyert csaták darabszáma
      */
     public static int countVictories(int[] battles) {
-        return -1;
+        int victorycount = 0;
+        for (int i = 0; i <battles.length ; i++) {
+            if (battles[i] > 0) {
+                victorycount++;
+            }
+            else continue;
+        }
+        return victorycount;
     }
 
     /**
@@ -164,7 +206,12 @@ public class Practice {
      * @param heights a kadétok magassága
      */
     public static boolean isInAscendingOrder(int[] heights) {
-        return false;
+        for (int i = 1; i <heights.length; i++) {
+            if(heights[i] < heights[i-1])
+                return false;
+
+        } return true;
+
     }
 
     /**
@@ -189,7 +236,14 @@ public class Practice {
      * @return az eredeti üzenet karakterei fordított sorrendben
      */
     public static char[] reverseMessage(char[] message) {
-        return null;
+        for (int i = 0; i <message.length/2; i++) {
+            char swap = message[i];
+            message[i] = message[message.length - 1 - i];
+            message[message.length - 1 -i] = swap;
+
+        }
+        
+        return message;
     }
 
     /**
@@ -221,9 +275,21 @@ public class Practice {
      * @return a legtöbb veszteséget tartalmazó hónap index-száma
      */
     public static int getWorstMonthIndex(int[][] lossesPerMonths) {
-        return -1;
-    }
+        int index = -1;
+        int veszteseg = 0;
+        for (int i=0;i<lossesPerMonths.length;i++){
+            int tempveszteseg = 0;
+            for(int j=0;j<lossesPerMonths[i].length;j++)
+                tempveszteseg += lossesPerMonths[i][j];
 
+            if(tempveszteseg > veszteseg) {
+                veszteseg = tempveszteseg;
+                index = i;
+            }
+        }
+
+        return index;
+    }
     /**
      * 10. feladat - 5p
      *
@@ -248,6 +314,7 @@ public class Practice {
      * @param shipPowers az űrhajók ereje
      */
     public static void sortShipsByPower(String[] shipNames, int[] shipPowers) {
+        
 
     }
 
